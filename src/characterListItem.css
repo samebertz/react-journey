@@ -1,0 +1,71 @@
+.character-list-item {
+  display: flex;
+  margin: 8px;
+  background-color: #dfdfdf;
+}
+
+.character-card {
+  display: block;
+  position: relative;
+  width: 128px;
+  height: 128px;
+  margin: 4px;
+}
+.character-card-portrait {
+  display: block;
+  float: left;
+  width: 128px;
+  height: 128px;
+}
+.character-card-name {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.character-card-element {
+  display: block;
+  float: left;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.character-card-weapon {
+  display: block;
+  float: left;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.character-card-rarity {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.character-detail-list {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 128px - 66.66666%);
+}
+.character-detail-item {
+  display: flex;
+  width: 100%;
+  margin: 4px 0;
+}
+.character-detail-icon {
+  display: flex;
+  width: 100%;
+  margin: 4px 0;
+  display: block;
+  float: left;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+}
