@@ -3,6 +3,7 @@ const mock_ASSET_PATHS = {
   'character': {
     'dir': 'temp_character/',
     'Test': 'temp_character.png',
+    'Amber': 'temp_character.png',
   },
   'element': {
     'dir': 'temp_element/',
@@ -18,12 +19,12 @@ const mock_ASSET_PATHS = {
   },
   'materials': {
     'dir': 'temp_material/',
-    'testcore': 'temp_material.png',
-    'testcrystal': 'temp_material.png',
-    'testweekly': 'temp_material.png',
-    'testcommon': 'temp_material.png',
-    'testlocal': 'temp_material.png',
-    'testbook': 'temp_material.png',
+    'testcore': 'temp_core.png',
+    'testcrystal': 'temp_crystal.png',
+    'testweekly': 'temp_weekly.png',
+    'testcommon': 'temp_common.png',
+    'testlocal': 'temp_local.png',
+    'testbook': 'temp_book.png',
   },
   'talents': {
     'dir': 'temp_talent/',
