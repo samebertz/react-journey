@@ -2,28 +2,39 @@ import React from 'react';
 import './KApp.css';
 import { getAssetPath } from './utils';
 
+const mock_ELEMENTS = ['cryo', 'anemo', 'pyro'];
+const mock_CHARACTER_DATA = new Map([
+  ['Test', {name: 'Test', element:'cryo', local: 'glaze', common: 'mask'}],
+  ['Amber', {name: 'Amber', element: 'pyro', local: 'chili', common: 'arrow'}],
+]);
+
 class KApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: true,
-      selected: [],
+      selected: new Map(Array.from(mock_CHARACTER_DATA.keys()).map(x => [x, false])),
     };
   }
-//this.setState((state, props) => ({selected: state.selected.splice([e.target.key])}))
+  
+  selectListItem = (e) => {
+    const k = e.currentTarget.getAttribute('name');
+    this.setState((state, props) => {
+      let s_ = new Map(state.selected.entries());
+      s_.set(k, !s_.get(k));
+      return {selected: s_};
+    });
+  }
+
   render() {
     return (
       <div className="app">
         <button id="toggleView" onClick={() => this.setState({view: !this.state.view})} />
         { this.state.view
-          ? <CharacterListView selected={this.state.selected} handleClick={e => {
-              const k = e.currentTarget.getAttribute('name');
-              this.setState((state, props) => ({selected: state.selected.concat([k])}));
-              console.log(this.state)
-            }} />
+          ? <CharacterListView selected={this.state.selected} handleClick={this.selectListItem} />
           : <MaterialListView input={this.state.selected} />
         }
-        <span>{JSON.stringify(this.state.selected)}</span>
+        <p>{JSON.stringify(Array.from(this.state.selected.entries()))}</p>
       </div>
     );
   }
@@ -37,37 +48,50 @@ class CharacterListView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: [],
+      filter: new Map(mock_ELEMENTS.map(x => [x, false])),
     };
+  }
+
+  selectFilter = (e) => {
+    const k = e.currentTarget.getAttribute('element');
+    this.setState((state, props) => {
+      let f_ = new Map(state.filter.entries())
+      f_.set(k, !f_.get(k));
+      return {filter: f_};
+    });
   }
 
   render() {
     return (
       <div className="view">
-        <CharacterListFilter handleClick={e => this.setState((state, props) => ({filter: state.filter + e.target.getAttribute('name')}))} />
-        <CharacterList {...this.props} />
+        <CharacterListFilter filter={this.state.filter} handleClick={this.selectFilter} />
+        <CharacterList characters={Array.from(mock_CHARACTER_DATA.values()).filter(c => !this.state.filter.get(c.element))} {...this.props} />
+        <p>{JSON.stringify(Array.from(this.state.filter.entries()))}</p>
       </div>
     );
   }
 }
 
 function CharacterListFilter(props) {
-  const mock_ELEMENTS=['cryo', 'anemo'];
-  return mock_ELEMENTS.map(e => <button key={e} name={e} className="toggleFilterElement" onClick={props.handleClick} />)
+  return mock_ELEMENTS.map(e => (
+    <button key={e} element={e} className={'filterButton' + (props.filter.get(e) ? ' activeFilter' : '')} onClick={props.handleClick}>
+      <img className="filterButtonImg" src={getAssetPath('element', e)} />
+    </button> )
+  );
 }
 
 function CharacterList(props) {
-  const mock_CHARACTER_DATA=[{name: 'Test'}, {name: 'Amber'}]
   return (
     <div className="characterList">
-      {mock_CHARACTER_DATA.map(c => <CharacterListItem key={c.name} character={c} handleClick={props.handleClick} />)}
+      {props.characters.map(c => <CharacterListItem key={c.name} character={(c)} selected={props.selected.get(c.name)} handleClick={props.handleClick} />)}
     </div>
   );
 }
 
 function CharacterListItem(props) {
   return (
-    <div className="characterListItem" name={props.character.name} onClick={props.handleClick}>
+    <div className={'character-card characterListItem' + (props.selected ? ' selectedListItem' : '')} name={props.character.name} onClick={props.handleClick}>
+      <img className="character-card-element" src={getAssetPath('element', props.character.element)} />
       <img src={getAssetPath('character', props.character.name)} />
     </div>
   );
@@ -80,7 +104,7 @@ function CharacterListItem(props) {
 function MaterialListView(props) {
   return (
     <div className="view">
-      <MaterialList {...props} />
+      <MaterialList materials={materialsFromCharacters(props.input)} />
     </div>
   );
 }
@@ -88,7 +112,7 @@ function MaterialListView(props) {
 function MaterialList(props) {
   return (
     <div className="materialList">
-      {getMaterialsFromCharacters(props.input).map(m => <MaterialListItem key={m} material={m} />)}
+      {props.materials.map(m => <MaterialListItem key={m} material={m} />)}
     </div>
   );
 }
@@ -97,9 +121,10 @@ function MaterialList(props) {
  * TODO
  * util
  */
-function getMaterialsFromCharacters(characters) {
-  return ['testcommon', 'testlocal'];
-}
+const materialsFromCharacters = (characters) =>
+  Array.from(mock_CHARACTER_DATA.keys())
+    .filter(x => characters.get(x))
+    .flatMap(c => [mock_CHARACTER_DATA.get(c).local, mock_CHARACTER_DATA.get(c).common]);
 
 function MaterialListItem(props) {
   return <img className="materialListItem" src={getAssetPath('materials', props.material)} alt={props.material} />;

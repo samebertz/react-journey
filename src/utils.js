@@ -8,6 +8,9 @@ const mock_ASSET_PATHS = {
   'element': {
     'dir': 'temp_element/',
     'testelement': 'temp_element.png',
+    'anemo': 'temp_anemo.png',
+    'cryo': 'temp_cryo.png',
+    'pyro': 'temp_pyro.png',
   },
   'weapon': {
     'dir': 'temp_weapon/',
@@ -23,7 +26,11 @@ const mock_ASSET_PATHS = {
     'testcrystal': 'temp_crystal.png',
     'testweekly': 'temp_weekly.png',
     'testcommon': 'temp_common.png',
+    'mask': 'temp_mask.png',
+    'arrow': 'temp_arrow.png',
     'testlocal': 'temp_local.png',
+    'glaze': 'temp_glaze.png',
+    'chili': 'temp_chili.png',
     'testbook': 'temp_book.png',
   },
   'talents': {

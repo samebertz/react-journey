@@ -1,3 +1,11 @@
+# List
+[x] reflect selected in render
+ - should selected boolean on list items?
+[x] select as set, and remove
+[x] filter
+[ ] output
+ - compute from selected
+
 # Components
 ## App
 view toggles between List and Output, maintains shared state
