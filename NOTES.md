@@ -3,8 +3,9 @@
  - should selected boolean on list items?
 [x] select as set, and remove
 [x] filter
-[ ] output
+[x] output
  - compute from selected
+[ ] change global consts, probably don't need characters to be a map, should be array
 
 # Components
 ## App
@@ -43,3 +44,4 @@ handle click in App?
 
 # Concerns
 dynamic data in render calls
+where to keep selected bools

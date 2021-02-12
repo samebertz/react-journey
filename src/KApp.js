@@ -104,12 +104,13 @@ function CharacterListItem(props) {
 function MaterialListView(props) {
   return (
     <div className="view">
-      <MaterialList materials={materialsFromCharacters(props.input)} />
+      <MaterialList materials={materialsFromCharacters([...props.input.entries()].filter(x=>x[1]).map(x=>x[0]))} />
     </div>
   );
 }
 
 function MaterialList(props) {
+
   return (
     <div className="materialList">
       {props.materials.map(m => <MaterialListItem key={m} material={m} />)}
@@ -121,10 +122,7 @@ function MaterialList(props) {
  * TODO
  * util
  */
-const materialsFromCharacters = (characters) =>
-  Array.from(mock_CHARACTER_DATA.keys())
-    .filter(x => characters.get(x))
-    .flatMap(c => [mock_CHARACTER_DATA.get(c).local, mock_CHARACTER_DATA.get(c).common]);
+const materialsFromCharacters = characters => characters.flatMap(c => [mock_CHARACTER_DATA.get(c).local, mock_CHARACTER_DATA.get(c).common]);
 
 function MaterialListItem(props) {
   return <img className="materialListItem" src={getAssetPath('materials', props.material)} alt={props.material} />;
