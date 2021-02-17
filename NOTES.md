@@ -6,6 +6,7 @@
 [x] output
  - compute from selected
 [ ] change global consts, probably don't need characters to be a map, should be array
+[ ] use passthroughProps
 
 # Components
 ## App

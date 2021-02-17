@@ -20,21 +20,12 @@
   border:4px solid lightcoral;
 }
 
-.character-card {
+.characterListItem {
   display: block;
   position: relative;
   width: 128px;
   height: 128px;
   border: 4px solid lightblue;
-}
-.character-card-element {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
 }
 
 .selectedListItem {
