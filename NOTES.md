@@ -46,3 +46,26 @@ handle click in App?
 # Concerns
 dynamic data in render calls
 where to keep selected bools
+
+# Scratch
+user data
+┣ characters
+┃ ┗ stats
+┗ weapons
+  ┗ stats
+
+view state
+┣ view modes
+┣ list filters and ordering
+┗ tracked characters
+
+
+┣┃┗┳━
+
+
+could have edit modes save to their own copy of data, or write to main store on change
+
+#### List
+- character list display mode toggle
+  + animated
+- tracked character editing

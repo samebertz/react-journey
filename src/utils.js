@@ -4,6 +4,7 @@ const mock_ASSET_PATHS = new Map([
     ['dir', 'temp_character/'],
     ['Test', 'temp_character.png'],
     ['Amber', 'temp_character.png'],
+    ['Diona', 'temp_character.png'],
   ])],
   ['element', new Map([
     ['dir', 'temp_element/'],
@@ -15,6 +16,8 @@ const mock_ASSET_PATHS = new Map([
   ['weapon', new Map([
     ['dir', 'temp_weapon/'],
     ['testweapon', 'temp_weapon.png'],
+    ['bow', 'temp_bow.png'],
+    ['sword', 'temp_sword.png'],
   ])],
   ['rarity', new Map([
     ['dir', 'temp_other/'],
@@ -69,9 +72,7 @@ const mock_ASSET_PATHS = new Map([
  * @param {*} name 
  */
 export function getAssetPath(type, name) {
-  console.log(type, name)
   return mock_ASSET_PATHS.get('rel_tld') + mock_ASSET_PATHS.get(type).get('dir') + mock_ASSET_PATHS.get(type).get(name);
-  // return './temp_assets/temp_weapon/temp_weapon.png';
 }
 
 const mock_CHARACTER_DATA = new Map([
@@ -178,9 +179,16 @@ export const CHARACTER_LIST = Array.from(mock_CHARACTER_DATA.keys());
  * @param {*} data 
  */
 export function getCharacterData(character, data) {
-  console.log('c : '+character)
-  console.log('d : '+data)
   return mock_CHARACTER_DATA.get(character).get(data);
 }
 
-export const mock_ELEMENTS = ['cryo', 'anemo', 'pyro', 'testelement'];
+/**
+ * TODO
+ * @param {*} character 
+ * @param {*} data 
+ */
+export function getAllMaterialsForCharacters(characters) {
+  return [...new Set(characters.flatMap(characters => [...getCharacterData(characters, 'materials').values()])).values()]
+}
+
+export const ELEMENT_LIST = ['cryo', 'anemo', 'pyro', 'testelement'];

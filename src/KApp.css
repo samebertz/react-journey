@@ -1,33 +1,98 @@
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.app {}
+
 #toggleView {
   width: 64px;
   height: 64px;
+  margin: 8px;
+  border: 2px solid black;
   background: red;
 }
 
+.view {
+  width: 900px;
+  background-color: lightcoral;
+}
+#characterListView {}
+
+#filterBar {}
 .filterButton {
-  margin: 0;
-  padding: 0;
   display: inline-block;
   width: 32px;
   height: 32px;
+  margin: 0;
+  padding: 0;
   border: 4px solid lightblue;
+}
+.activeFilter {
+  border:4px solid lightcoral;
 }
 .filterButtonImg {
   width: 100%;
   height: 100%;
 }
-.activeFilter {
-  border:4px solid lightcoral;
-}
 
+.list {}
+#characterList {}
 .characterListItem {
-  display: block;
-  position: relative;
   width: 128px;
   height: 128px;
   border: 4px solid lightblue;
 }
-
 .selectedListItem {
   border: 4px solid green;
+}
+
+.characterCard {
+  position: relative;
+  width: 128px;
+  height: 100%;
+}
+.characterPortrait {}
+.characterName {
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.elementIcon, .weaponIcon {
+  position: absolute;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+}
+.elementIcon {
+  top: 0;
+}
+.weaponIcon {
+  top: 20px;
+}
+
+#materialListView {}
+#materialList{
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  line-height: 0;
+}
+.materialListItem {
+  margin: 8px 0 0 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  width: fit-content;
+  height: fit-content;
+}
+.materialListItem:last-child {
+  margin: 8px;
 }

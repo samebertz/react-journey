@@ -13,27 +13,19 @@ class KApp extends React.Component {
     };
   }
   
-  handleClick = (e) => {
-    const k = e.currentTarget.getAttribute('name');
-    this.setState((state, props) => {
-      let s_ = new Map(state.selected.entries());
-      s_.set(k, !s_.get(k));
-      return {selected: s_};
-    });
-  }
+  setSelected = c => this.setState((state, _) => ({selected: new Map(state.selected).set(c, !state.selected.get(c))}));
+  handleClick = e => this.setSelected(e.currentTarget.getAttribute('name'));
 
-  render() {
-    return (
-      <div className="app">
-        <button id="toggleView" onClick={() => this.setState({view: !this.state.view})} />
-        { this.state.view
-          ? <CharacterListView selected={this.state.selected} handleClick={this.handleClick} />
-          : <MaterialListView input={this.state.selected} />
-        }
-        <p>{JSON.stringify(Array.from(this.state.selected.entries()))}</p>
-      </div>
-    );
-  }
+  getSelectedList = () => [...this.state.selected.entries()].filter(x=>x[1]).map(x=>x[0]);
+
+  render() { return (
+    <div className="app">
+      <button id="toggleView" onClick={() => this.setState({view: !this.state.view})} />
+      { this.state.view
+        ? <CharacterListView selected={this.state.selected} handleClick={this.handleClick} />
+        : <MaterialListView input={this.getSelectedList()} /> }
+    </div>
+  )}
 }
 
 export default KApp;

@@ -1,58 +1,50 @@
 import React from 'react';
-import { CHARACTER_LIST, getCharacterData, getAssetPath, mock_ELEMENTS } from './utils.js';
+import { getCharacterData, getAssetPath, CHARACTER_LIST, ELEMENT_LIST } from './utils.js';
 import CharacterCard from './CharacterCard.js';
 
 class CharacterListView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: new Map(mock_ELEMENTS.map(x => [x, false])),
+      filtered: new Map(ELEMENT_LIST.map(x => [x, false])),
     };
   }
 
-  handleClick = (e) => {
-    const k = e.currentTarget.getAttribute('element');
-    this.setState((state, props) => {
-      let f_ = new Map(state.filter.entries())
-      f_.set(k, !f_.get(k));
-      return {filter: f_};
-    });
-  }
+  setFiltered = e => this.setState((state, _) => ({filtered: new Map(state.filtered).set(e, !state.filtered.get(e))}));
+  handleClick = e => this.setFiltered(e.currentTarget.getAttribute('element'));
 
-  render() {
-    return (
-      <div className="view">
-        <CharacterListFilter filter={this.state.filter} handleClick={this.handleClick} />
-        <CharacterList characters={CHARACTER_LIST.filter(c => !this.state.filter.get(getCharacterData(c,'element')))} {...this.props} />
-        <p>{JSON.stringify(Array.from(this.state.filter.entries()))}</p>
-      </div>
-    );
-  }
-}
+  getFilteredList = () => CHARACTER_LIST.filter(c => !this.state.filtered.get(getCharacterData(c,'element')));
 
-function CharacterListFilter(props) {
-  return mock_ELEMENTS.map(e => (
-    <button key={e} element={e} className={'filterButton' + (props.filter.get(e) ? ' activeFilter' : '')} onClick={props.handleClick}>
-      <img className="filterButtonImg" src={getAssetPath('element', e)} alt="" />
-    </button> )
-  );
-}
-
-function CharacterList(props) {
-  console.log(props.characters)
-  return (
-    <div className="characterList">
-      {props.characters.map(c => <CharacterListItem key={c} character={c} selected={props.selected.get(c)} handleClick={props.handleClick} />)}
+  render() { return (
+    <div className="view" id="characterListView">
+      <FilterBar filtered={this.state.filtered} handleClick={this.handleClick} />
+      <CharacterList characters={this.getFilteredList()} {...this.props} />
     </div>
-  );
+  )}
 }
 
-function CharacterListItem(props) {
-  return (
-    <div className={'characterListItem' + (props.selected ? ' selectedListItem' : '')} name={getCharacterData(props.character, 'name')} onClick={props.handleClick}>
-      <CharacterCard character={props.character} />
-    </div>
-  );
-}
+function FilterBar(props) { return (
+  <ul id="filterBar">
+    {ELEMENT_LIST.map(e => <FilterButton key={e} element={e} filtered={props.filtered.get(e)} handleClick={props.handleClick} />)}
+  </ul>
+)}
+
+function FilterButton(props) { return (
+  <button className={'filterButton' + (props.filtered ? ' activeFilter' : '')} element={props.element} onClick={props.handleClick}>
+    <img className="filterButtonImg" src={getAssetPath('element', props.element)} alt="" />
+  </button>
+)}
+
+function CharacterList(props) { return (
+  <ul className="list" id="characterList">
+    {props.characters.map(c => <CharacterListItem key={c} character={c} selected={props.selected.get(c)} handleClick={props.handleClick} />)}
+  </ul>
+)}
+
+function CharacterListItem(props) { return (
+  <li className={'characterListItem' + (props.selected ? ' selectedListItem' : '')} name={getCharacterData(props.character, 'name')} onClick={props.handleClick}>
+    <CharacterCard character={props.character} />
+  </li>
+)}
 
 export default CharacterListView;
