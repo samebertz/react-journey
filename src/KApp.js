@@ -20,7 +20,7 @@ class KApp extends React.Component {
 
   render() { return (
     <div className="app">
-      <button id="toggleView" onClick={() => this.setState({view: !this.state.view})} />
+      <button id="toggleView" onClick={() => this.setState({view: !this.state.view})}>{this.state.view?'list':'mats'}</button>
       { this.state.view
         ? <CharacterListView selected={this.state.selected} handleClick={this.handleClick} />
         : <MaterialListView input={this.getSelectedList()} /> }

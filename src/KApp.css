@@ -57,26 +57,26 @@ ul {
   width: 128px;
   height: 100%;
 }
-.characterPortrait {}
+.characterPortrait {width: 128px;height: 128px;background-color: lightgray;}
 .characterName {
   position: absolute;
   bottom: 4px;
   left: 0;
   width: 100%;
   text-align: center;
-}
+} .characterName{background-color: lightsalmon;}
 .elementIcon, .weaponIcon {
   position: absolute;
   right: 0;
-  width: 16px;
-  height: 16px;
-  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
 }
 .elementIcon {
   top: 0;
 }
 .weaponIcon {
-  top: 20px;
+  top: 40px;
 }
 
 #materialListView {}
@@ -92,7 +92,7 @@ ul {
   overflow: hidden;
   width: fit-content;
   height: fit-content;
-}
+} .materialListItem > img {width: 128px;height: 128px;background-color: lightgray;}
 .materialListItem:last-child {
   margin: 8px;
 }
