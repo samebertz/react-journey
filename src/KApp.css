@@ -92,7 +92,9 @@ ul {
   overflow: hidden;
   width: fit-content;
   height: fit-content;
-} .materialListItem > img {width: 128px;height: 128px;background-color: lightgray;}
+} .materialListItem{width:128px;position: relative;overflow: initial;display:flex;justify-content: center;}
+  .materialListItem > img {border-radius: 8px;width: 128px;height: 128px;background-color: lightgray;overflow: hidden;}
+  .materialListItem > span {font:small-caps bold 14px sans-serif;line-height:16px;height:16px;width:fit-content;min-width:16px;max-width:120px;text-align:center;position:absolute;bottom:0;border-radius:9px;border:2px solid black;background:lightgoldenrodyellow;}
 .materialListItem:last-child {
   margin: 8px;
 }

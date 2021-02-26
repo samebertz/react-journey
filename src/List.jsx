@@ -1,11 +1,13 @@
 import React from 'react';
 
-const List = ({Component, items}) => (
+const List = (props) => (
   <ul className='list'>
-    {items.map(_=> <Component item={_} />)}
+    {props.items.map(_=> <props.component item={_} key={_.id||_} />)}
   </ul>
 );
 
-const ListItem = ({item}) => <li className='list-item'>{item}</li>;
+// const ListItem = ({item})=> <li className='list-item'>{item}</li>;
 
-<List Component={ListItem} items={items} />
+// <List Component={ListItem} items={items} />
+
+export default List;
