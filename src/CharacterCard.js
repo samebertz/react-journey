@@ -18,3 +18,50 @@ function ElementIcon(props) { return ( <img className="elementIcon" src={getAsse
 function WeaponIcon(props) { return ( <img className="weaponIcon" src={getAssetPath('weapon', props.weapon)} alt="" /> ) }
 
 export default CharacterCard;
+
+/*
+import { getAssetPath as imgSrc, getCharacterData as charData } from "./utils";
+
+const CharacterCard = ({character: char}) => (
+  <div className="charCard">
+    <CharPtrt char={char} />
+    <ElmtIcon elmt={charData(char, 'element')} />
+    <WeapIcon weap={charData(char, 'weapon')} />
+    <CharName name={charData(char, 'name')} />
+  </div>
+);
+
+const CharPtrt = p => <img className="charPtrt" src={imgSrc('character', p.char)} />
+const CharName = p => <span className="charName">{p.name}</span>
+const ElmtIcon = p => <img className="elmtIcon" src={imgSrc('element', p.elmt)} />
+const WeapIcon = p => <img className="weapIcon" src={imgSrc('weapon', p.weap)} />
+
+export default CharacterCard;
+
+<CharacterCard character="Amber" />
+*/
+
+/*
+import { getAssetPath as imgSrc, getCharacterData as charData } from "./utils";
+
+const CharacterCard = p => (
+  <div className="charCard">
+    <CharPtrt char={p.char} />
+    <ElmtIcon elmt={p.elmt} />
+    <WeapIcon weap={p.weap} />
+    <CharName name={p.name} />
+  </div>
+);
+
+const CharPtrt = p => <img className="charPtrt" src={p.src} />
+const CharName = p => <span className="charName">{p.name}</span>
+const ElmtIcon = p => <img className="elmtIcon" src={p.src} />
+const WeapIcon = p => <img className="weapIcon" src={p.src} />
+
+export default CharacterCard;
+
+const cardData = c => ({'char': c, 'elmt': charData('elmt', c), 'weap': charData('weap', c), 'name': C});
+<CharacterCard {...cardData(p.char)} />
+
+<CharacterCard {...charData(p.char, ['name', 'elmt', 'weap'])} />
+*/

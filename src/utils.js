@@ -1,71 +1,3 @@
-// const mock_ASSET_PATHS = new Map([
-//   ['rel_tld', './temp_assets/'],
-//   ['character', new Map([
-//     ['dir', 'temp_character/'],
-//     ['Test', 'temp_character.png'],
-//     ['Amber', 'temp_character.png'],
-//     ['Diona', 'temp_character.png'],
-//   ])],
-//   ['element', new Map([
-//     ['dir', 'temp_element/'],
-//     ['testelement', 'temp_element.png'],
-//     ['anemo', 'temp_anemo.png'],
-//     ['cryo', 'temp_cryo.png'],
-//     ['pyro', 'temp_pyro.png'],
-//   ])],
-//   ['weapon', new Map([
-//     ['dir', 'temp_weapon/'],
-//     ['testweapon', 'temp_weapon.png'],
-//     ['bow', 'temp_bow.png'],
-//     ['sword', 'temp_sword.png'],
-//   ])],
-//   ['rarity', new Map([
-//     ['dir', 'temp_other/'],
-//     ['4', '4star.png'],
-//   ])],
-//   ['material', new Map([
-//     ['dir', 'temp_material/'],
-//     ['testcore', 'temp_core.png'],
-//     ['pyro_core', 'temp_pyro_core.png'],
-//     ['cryo_core', 'temp_cryo_core.png'],
-//     ['testcrystal', 'temp_crystal.png'],
-//     ['pyro_crystal', 'temp_pyro_crystal.png'],
-//     ['cryo_crystal', 'temp_cryo_crystal.png'],
-//     ['testweekly', 'temp_weekly.png'],
-//     ['dvalin_sigh', 'temp_weekly.png'],
-//     ['childe_shard', 'temp_weekly.png'],
-//     ['testcommon', 'temp_common.png'],
-//     ['mask', 'temp_mask.png'],
-//     ['arrowhead', 'temp_arrowhead.png'],
-//     ['testlocal', 'temp_local.png'],
-//     ['glaze', 'temp_glaze.png'],
-//     ['small_lamp_grass', 'temp_small_lamp_grass.png'],
-//     ['calla_lily', 'temp_calla_lily.png'],
-//     ['chili', 'temp_chili.png'],
-//     ['testbook', 'temp_book.png'],
-//     ['freedom', 'temp_book.png'],
-//   ])],
-//   ['talent', new Map([
-//     ['dir', 'temp_talent/'],
-//     ['testbasicattack', 'temp_talent.png'],
-//     ['testelementalskill', 'temp_talent.png'],
-//     ['testelementalburst', 'temp_talent.png'],
-//     ['testpassive1', 'temp_talent.png'],
-//     ['testpassive2', 'temp_talent.png'],
-//     ['testpassive3', 'temp_talent.png'],
-//     ['testpassive4', 'temp_talent.png'],
-//   ])],
-//   ['constellation', new Map([
-//     ['dir', 'temp_constellation/'],
-//     ['testconstellation1', 'temp_constellation.png'],
-//     ['testconstellation2', 'temp_constellation.png'],
-//     ['testconstellation3', 'temp_constellation.png'],
-//     ['testconstellation4', 'temp_constellation.png'],
-//     ['testconstellation5', 'temp_constellation.png'],
-//     ['testconstellation6', 'temp_constellation.png'],
-//   ])],
-// ]);
-
 const mock_ASSET_PATHS = new Map([
   ['rel_tld', './assets/'],
   ['character', new Map([
@@ -137,6 +69,76 @@ const mock_ASSET_PATHS = new Map([
     ['testconstellation6', 'temp_constellation.png'],
   ])],
 ]);
+
+/*
+const mock_ASSET_PATHS = new Map([
+  ['rel_tld', './temp_assets/'],
+  ['character', new Map([
+    ['dir', 'temp_character/'],
+    ['Test', 'temp_character.png'],
+    ['Amber', 'temp_character.png'],
+    ['Diona', 'temp_character.png'],
+  ])],
+  ['element', new Map([
+    ['dir', 'temp_element/'],
+    ['testelement', 'temp_element.png'],
+    ['anemo', 'temp_anemo.png'],
+    ['cryo', 'temp_cryo.png'],
+    ['pyro', 'temp_pyro.png'],
+  ])],
+  ['weapon', new Map([
+    ['dir', 'temp_weapon/'],
+    ['testweapon', 'temp_weapon.png'],
+    ['bow', 'temp_bow.png'],
+    ['sword', 'temp_sword.png'],
+  ])],
+  ['rarity', new Map([
+    ['dir', 'temp_other/'],
+    ['4', '4star.png'],
+  ])],
+  ['material', new Map([
+    ['dir', 'temp_material/'],
+    ['testcore', 'temp_core.png'],
+    ['pyro_core', 'temp_pyro_core.png'],
+    ['cryo_core', 'temp_cryo_core.png'],
+    ['testcrystal', 'temp_crystal.png'],
+    ['pyro_crystal', 'temp_pyro_crystal.png'],
+    ['cryo_crystal', 'temp_cryo_crystal.png'],
+    ['testweekly', 'temp_weekly.png'],
+    ['dvalin_sigh', 'temp_weekly.png'],
+    ['childe_shard', 'temp_weekly.png'],
+    ['testcommon', 'temp_common.png'],
+    ['mask', 'temp_mask.png'],
+    ['arrowhead', 'temp_arrowhead.png'],
+    ['testlocal', 'temp_local.png'],
+    ['glaze', 'temp_glaze.png'],
+    ['small_lamp_grass', 'temp_small_lamp_grass.png'],
+    ['calla_lily', 'temp_calla_lily.png'],
+    ['chili', 'temp_chili.png'],
+    ['testbook', 'temp_book.png'],
+    ['freedom', 'temp_book.png'],
+  ])],
+  ['talent', new Map([
+    ['dir', 'temp_talent/'],
+    ['testbasicattack', 'temp_talent.png'],
+    ['testelementalskill', 'temp_talent.png'],
+    ['testelementalburst', 'temp_talent.png'],
+    ['testpassive1', 'temp_talent.png'],
+    ['testpassive2', 'temp_talent.png'],
+    ['testpassive3', 'temp_talent.png'],
+    ['testpassive4', 'temp_talent.png'],
+  ])],
+  ['constellation', new Map([
+    ['dir', 'temp_constellation/'],
+    ['testconstellation1', 'temp_constellation.png'],
+    ['testconstellation2', 'temp_constellation.png'],
+    ['testconstellation3', 'temp_constellation.png'],
+    ['testconstellation4', 'temp_constellation.png'],
+    ['testconstellation5', 'temp_constellation.png'],
+    ['testconstellation6', 'temp_constellation.png'],
+  ])],
+]);
+*/
 
 /**
  * TODO
@@ -290,7 +292,7 @@ export function getLevelCost(from, to) {
   return new Map([['xpbooks', materials], ['mora', mora]])
 }
 
-
+/*
 const ASCENSIONMATS = [
   new Map([
     ["crystal rarity", 0],
@@ -391,7 +393,9 @@ const ASCENSIONMATS = [
     ["unlock", "None"],
   ]),
 ]
+*/
 
+/*
 const TALENTMATS = [
   new Map([
     ['ascension', 0],
@@ -484,6 +488,39 @@ const TALENTMATS = [
     ['weekly amount', 2],
   ]),
 ]
+*/
+
+function aMapFrom2dArrayWithHeader([h, ...arr]) {
+  return arr.map(r=>new Map(r.map((v,i)=>[h[i],v])));
+}
+
+const _TALENTMATS = [
+  ['ascension','teaching amount','teaching rarity','common amount','common rarity','mora','weekly amount',],
+  [0,0,0,0,0,0,0,],
+  [2,3,2,6,1,12500,0,],
+  [3,2,3,3,2,17500,0,],
+  [3,4,3,4,2,25000,0,],
+  [4,6,3,6,2,30000,0,],
+  [4,9,3,9,2,37500,0,],
+  [5,4,4,4,3,120000,1,],
+  [5,6,4,6,3,260000,1,],
+  [6,12,4,9,3,450000,2,],
+  [6,16,4,12,3,700000,2,],
+]
+
+const _ASCENSIONMATS = [
+  ['crystal rarity','crystal amount','core amount','local amount','common rarity','common amount','level','mora','ar','max level','max talent','unlock',],
+  [0,0,0,0,0,0,0,0,0,20,1,"None",],
+  [1,1,0,3,1,3,20,20000,15,40,1,"Passive Talent 1",],
+  [2,3,2,10,1,15,40,40000,25,50,2,"None",],
+  [2,6,4,20,2,12,50,60000,30,60,4,"None",],
+  [3,3,8,30,2,18,60,80000,35,70,6,"Passive Talent 2",],
+  [3,6,12,45,3,16,70,100000,40,80,8,"None",],
+  [4,6,20,60,3,24,80,120000,45,90,10,"None",],
+]
+
+export const ASCENSIONMATS = aMapFrom2dArrayWithHeader(_ASCENSIONMATS),
+             TALENTMATS = aMapFrom2dArrayWithHeader(_TALENTMATS);
 
 /**
  * Character ascension calculations

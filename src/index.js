@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import KApp from './KApp';
 import reportWebVitals from './reportWebVitals';
+
+import Test from './Test.jsx';
 
 ReactDOM.render(
   <React.StrictMode>
-    <KApp />
+    <Test />
   </React.StrictMode>,
   document.getElementById('root')
 );

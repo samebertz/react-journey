@@ -1,0 +1,38 @@
+body {background-color: #222;}
+#testwrapper{margin:100px;}
+#test {
+  position: relative;
+  /* margin: 100px; */
+  height: 100px;
+  width:fit-content;
+  background: transparent;
+}
+
+.test {
+  float: left;
+  position: relative;
+  margin: 4px;
+  width: 24px;
+  height: 24px;
+  background-color: #777;
+  clip-path: url(#star);
+}
+
+.test:first-child {
+  background-color: #fff;
+}
+/* .test:nth-child(3) {
+  background: radial-gradient(20% 20%, #fff 10%, #777);
+}
+.test:nth-child(2)::before {
+  content:'';
+  display: block;
+  margin: 4px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  clip-path: url(#star);
+} */
+.test:nth-child(2), .test:nth-child(3), .test:nth-child(4) {
+  background: repeating-linear-gradient(-45deg, #777 0 50%, #fff 50% 100%);
+}
