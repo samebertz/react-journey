@@ -7,7 +7,9 @@ import Test from './Test.jsx';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Test />
+    <div id="testwrapper">
+    {new Array(10).fill(0).map((_,i)=><Test key={i}/>)}
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -13,28 +13,11 @@ class Test extends React.Component {
   }
 
   getClosestStop = s => {
-    // // console.log('getClosestStop');console.log(s);
-    const x = s.nativeEvent.layerX;
-    // console.log('layerX: '+x);
-    const t = s.currentTarget;
-    // console.log(t);
-    const w = t.clientWidth / 6;
-    const p = Math.floor(x / w); // + 1
-    // console.log('pips from left: '+Math.abs(this.state.stops[0]-1-p))
-    // console.log('pips from right: '+Math.abs(this.state.stops[1]-1-p));
-    // const closer = Math.abs(this.state.stops[0]-1-p) < Math.abs(this.state.stops[1]-1-p) ? 'left' : 'right';
-    // console.log('closer: '+closer);
-    return Math.abs(this.state.stops[0]-1-p) < Math.abs(this.state.stops[1]-1-p) ? 0 : 1;
+    const p = this.getClosestPip(s);
+    return Math.abs(this.state.stops[0]-p) <= Math.abs(this.state.stops[1]-p) ? 0 : 1;
   };
   getClosestPip = s => {
-    // // console.log('getClosestPip');console.log(s);
-    const x = s.nativeEvent.layerX;
-    // console.log(x);
-    const t = s.currentTarget;
-    // console.log(t);
-    const w = t.clientWidth / 6;
-    // console.log(Math.floor(x / w));
-    return Math.floor(x / w) + 1;
+    return Math.round((s.nativeEvent.layerX + ((s.currentTarget.clientWidth / 6) / 4)) / (s.currentTarget.clientWidth / 6));
   };
   setStop = (p) => this.setState((state,_) => {
     const stops = state.stops.slice();
@@ -54,20 +37,17 @@ class Test extends React.Component {
 
   // on mouse down, set which stop is grabbed, 0: left, 1: right
   onMouseDown = s => {
-    // console.log('onMouseDown');console.log(s);
     this.setState({grabbed: this.getClosestStop(s)});
     // s.preventDefault(); s.stopPropagation(); return false;
   };
   // on mouse move, bring the stop with the cursor
   onMouseMove = s => {
-    // console.log('onMouseMove');console.log(s);
     const p = this.getClosestPip(s);
-    if(p !== this.state.stops[this.state.grabbed]) this.setStop(p);
+    if(p !== this.state.stops[this.state.grabbed] && s.nativeEvent.buttons & 1) this.setStop(p);
     // s.preventDefault(); s.stopPropagation(); return false;
   };
   // on mouse up, unset grabbed
   onMouseUp = s => {
-    // console.log('onMouseUp');console.log(s);
     this.setState({grabbed: false});
     // s.preventDefault(); s.stopPropagation(); return false;
   };
@@ -76,12 +56,12 @@ class Test extends React.Component {
     // only listen to move and up if a stop is grabbed
     const handlers = {onMouseDown: this.onMouseDown};
     Object.assign(handlers, false!==this.state.grabbed ? {onMouseMove: this.onMouseMove, onMouseUp: this.onMouseUp} : {});
-    return ( <div id="testwrapper">
+    return ( <>
       <AscensionPipStarClipPath />
       <div id="test" {...handlers}>
         {new Array(6).fill(0).map((_,i)=><AscensionPip key={i} pip={i} classes={i < this.state.stops[0] ? ['activeSource'] : i < this.state.stops[1] ? ['activeTarget'] : []} />)}
       </div>
-    </div> )
+    </> )
   }
 }
 
@@ -93,4 +73,6 @@ export default Test;
  *  + mousemove(move selected)
  *  + mouseup(unbind mousemove and mouseup)
  *  + on initial mousedown, maybe move closest stop?
+ *  + bind mousemove and mouseup to window?
+ *  + change getClosestStop to grab left stop when stops are superposed and click is on left, or right when click is on right
  */
