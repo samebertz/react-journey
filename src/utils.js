@@ -142,8 +142,9 @@ const mock_ASSET_PATHS = new Map([
 
 /**
  * TODO
- * @param {*} type 
- * @param {*} name 
+ * @param {string} type - asset type/category key
+ * @param {string} name - specific asset key
+ * @return {string} fully qualified path
  */
 export function getAssetPath(type, name) {
   // console.log('getAssetPath('+[].slice.call(arguments)+')')
@@ -253,8 +254,11 @@ export const CHARACTER_LIST = Array.from(mock_CHARACTER_DATA.keys());
 
 /**
  * TODO
- * @param {*} character 
- * @param {*} data 
+ * @param {string} character - character name
+ * @param {string} data - data key
+ * @return {string|number|Map} data keys `name`, `element`, `weapon` return `string`
+ * data key `rarity` returns `number`
+ * data keys `materials`, `talents`, `constellations` return `Map`
  */
 export function getCharacterData(character, data) {
   return mock_CHARACTER_DATA.get(character).get(data);
@@ -262,8 +266,8 @@ export function getCharacterData(character, data) {
 
 /**
  * TODO
- * @param {*} character 
- * @param {*} data 
+ * @param {Array<string>} characters - array of character names
+ * @return {Array<string>} array of all unique material data keys associated with characters
  */
 export function getAllMaterialsForCharacters(characters) {
   return [...new Set(characters.flatMap(characters => [...getCharacterData(characters, 'materials').values()])).values()]
@@ -273,7 +277,9 @@ export const ELEMENT_LIST = ['cryo', 'anemo', 'pyro', 'geo', 'electro', 'hydro',
 
 const TOTALEXP = [0,0,1000,2325,4025,6175,8800,11950,15675,20025,25025,30725,37175,44400,52450,61375,71200,81950,93675,106400,120175,135050,151850,169850,189100,209650,231525,254775,279425,305525,333100,362200,392850,425100,458975,494525,531775,570750,611500,654075,698500,744800,795425,848125,902900,959800,1018875,1080150,1143675,1209475,1277600,1348075,1424575,1503625,1585275,1669550,1756500,1846150,1938550,2033725,2131725,2232600,2341550,2453600,2568775,2687100,2808625,2933400,3061475,3192875,3327650,3465825,3614525,3766900,3922975,4082800,4246400,4413825,4585125,4760350,4939525,5122700,5338925,5581950,5855050,6161850,6506450,6893400,7327825,7815450,8362650]
 /**
- * Character level up calculations
+ * Calculate materials required to gain XP
+ * @param {number} xp - min xp required
+ * @return {Array<number>} Array of number of each tier of xp book required
  */
 function calculateXPMaterials(xp) {
   let book3 = Math.floor(xp / 20000)
@@ -281,9 +287,21 @@ function calculateXPMaterials(xp) {
   let book1 = Math.ceil((xp - book3 * 20000 - book2 * 5000) / 1000)
   return [book1, book2, book3]
 }
+/**
+ * Calculate Mora required to use xp books
+ * Mora required per XP is .2, i.e. ratio of 1 Mora to 5 XP
+ * @param {Array<number>} materials - Array of number of XP material books, as from {@link calculateXPMaterials}
+ * @return {number} total Mora
+ */
 function calculateMoraForXPMaterials(materials) {
   return .2 * (materials[2]*20000 + materials[1]*5000 + materials[0]*1000)
 }
+/**
+ * Calculate XP materials and Mora required to gain levels
+ * @param {number} from - starting level
+ * @param {number} to - target level
+ * @return {Map<string,*>} Map with keys `xpbooks` - pointing to the array returned by {@link calculateXPMaterials} - and `mora`
+ */
 export function getLevelCost(from, to) {
   const fromXP = TOTALEXP[from], toXP = TOTALEXP[to],
         materials = calculateXPMaterials(toXP - fromXP),
@@ -490,6 +508,12 @@ const TALENTMATS = [
 ]
 */
 
+/**
+ * Transforms spreadsheet-style single header data into fully keyed Maps
+ * @param {Array<Array>} param0 - 2d Array representation of a table,
+ * where the first element is the header
+ * @return {Array<Map>} Array of Maps, where the column headers are the keys.
+ */
 function aMapFrom2dArrayWithHeader([h, ...arr]) {
   return arr.map(r=>new Map(r.map((v,i)=>[h[i],v])));
 }
@@ -523,7 +547,11 @@ export const ASCENSIONMATS = aMapFrom2dArrayWithHeader(_ASCENSIONMATS),
              TALENTMATS = aMapFrom2dArrayWithHeader(_TALENTMATS);
 
 /**
- * Character ascension calculations
+ * Looks up and computes all materials required for a character to ascend
+ * @param {string} name
+ * @param {number} from - current ascension
+ * @param {number} to - target ascension
+ * @return {Map} Variably nested Map of ascension material names to amount required
  */
 function getAscensionCost(name, from, to) {
   let materials = new Map([
@@ -546,7 +574,11 @@ function getAscensionCost(name, from, to) {
 }
 
 /**
- * Character talent level up calculations
+ * Calculates talent level up costs
+ * @param {string} name - character name
+ * @param {number} from - current talent level
+ * @param {number} to - target talent level
+ * @return {Map} Map of talent material names to amount required
  */
 function getTalentCost(name, from, to) {
   // console.log("getTalentCost("+[].slice.call(arguments)+")")
@@ -567,6 +599,22 @@ function getTalentCost(name, from, to) {
   return materials
 }
 
+/**
+ * Calculates character advancement costs
+ * uses {@linkcode getAscensionCost}, {@linkcode getTalentCost}, {@linkcode getLevelCost}
+ * @param {string} name - character name
+ * @param {number} lFrom - current level
+ * @param {number} lTo - target level
+ * @param {number} aFrom - current ascension
+ * @param {number} aTo - target ascension
+ * @param {number} t1From - basic attack current level
+ * @param {number} t1To - basic attack target level
+ * @param {number} t2From - elemental skill current level
+ * @param {number} t2To - elemental skill target level
+ * @param {number} t3From - elemental burst current level
+ * @param {number} t3To - elemental burst target level
+ * @return {Map} - Map of material names to amount required
+ */
 export function getCost(name, lFrom, lTo, aFrom, aTo, t1From, t1To, t2From, t2To, t3From, t3To) {
   // console.log("getCost("+[].slice.call(arguments)+")")
   let costs = [
