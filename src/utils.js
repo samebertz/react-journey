@@ -140,8 +140,7 @@ const mock_ASSET_PATHS = new Map([
 ]);
 */
 
-/**
- * TODO
+/** TODO
  * @param {string} type - asset type/category key
  * @param {string} name - specific asset key
  * @return {string} fully qualified path
@@ -252,8 +251,7 @@ const mock_CHARACTER_DATA = new Map([
 
 export const CHARACTER_LIST = Array.from(mock_CHARACTER_DATA.keys());
 
-/**
- * TODO
+/** TODO
  * @param {string} character - character name
  * @param {string} data - data key
  * @return {string|number|Map} data keys `name`, `element`, `weapon` return `string`
@@ -264,8 +262,7 @@ export function getCharacterData(character, data) {
   return mock_CHARACTER_DATA.get(character).get(data);
 }
 
-/**
- * TODO
+/** TODO
  * @param {Array<string>} characters - array of character names
  * @return {Array<string>} array of all unique material data keys associated with characters
  */
@@ -640,8 +637,12 @@ export function getCost(name, lFrom, lTo, aFrom, aTo, t1From, t1To, t2From, t2To
   return materials
 }
 
-
-
+/**
+ * computes talent level up materials and their amounts required for a character
+ * @param {Array} input - Array of 2 element Arrays where the first element is a character name
+ * and the second is the inputs for that character from the edit view
+ * @return {Map} Map with k,v pairs that are material names and the amounts required
+ */
 export function getTalentMaterialsForCharacters(input) {
   // let mats = new Map([...new Set([...input.keys()].flatMap(character => 
   //   [...getCharacterData(character, 'materials').values()]
@@ -677,6 +678,8 @@ export function getTalentMaterialsForCharacters(input) {
         let n = nameLookupForTeachings(tmats.get('teaching'),i)
         mats.set(n, (mats.get(n) || 0) + v)
       })
+      console.log('tcost common: '+tcost.get('common').filter(x=>x>0))
+      console.log('tmats common: '+tmats.get('common'))
       tcost.get('common').filter(x=>x>0).forEach((v,i) => {
         let n = nameLookupForCommons(tmats.get('common'),i)
         mats.set(n, (mats.get(n) || 0) + v)
@@ -687,6 +690,12 @@ export function getTalentMaterialsForCharacters(input) {
   return mats
 }
 
+/**
+ * transforms short name into full display name for talent level up books
+ * @param {string} mat - type / short name
+ * @param {number} rarity
+ * @return {string} full name
+ */
 function nameLookupForTeachings(mat, rarity) {
   return [
     "Teachings of \'_\'",
@@ -695,7 +704,7 @@ function nameLookupForTeachings(mat, rarity) {
   ][rarity].replace("_", mat)
 }
 
-const commons = new Map([
+export const commons = new Map([
   ['slime condensate', new Map([
     ['type', 'slime'],
     ['tiers', [
@@ -753,9 +762,18 @@ const commons = new Map([
     ]]
   ])],
 ])
+/**
+ * transforms short name into full display name for common materials
+ * @param {string} mat - type / short name
+ * @param {number} rarity 
+ * @return {string} full name
+ */
 function nameLookupForCommons(mat, rarity) {
+  // TODO: fix this hacky intermediate lookup for mock data
+  const info = commons.get([...commons.entries()].find(([a,b])=>b.get('type')==mat)[0]);
   // return commons.get(mat.toLowerCase()).get('tiers')[rarity]
-  //   .replace("_", commons.get(mat.toLowerCase()).get('type').replace(/\+.*/, ""))
-  return [...commons.values()].find(e=>e.get('type')==mat).get('tiers')[rarity]
-    .replace("_", mat.replace(/\+.*/, ""))
+  //   .replace("_", commons.get(mat.toLowerCase()).get('type').replace(/\+.*/, ""));
+  // return [...commons.values()].find(e=>e.get('type')==mat).get('tiers')[rarity]
+  //   .replace("_", mat.replace(/\+.*/, ""))
+  return info.get('tiers')[rarity].replace("_", info.get('type').replace(/\+.*/, ""));
 }
