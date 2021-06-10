@@ -563,9 +563,9 @@ function getAscensionCost(name, from, to) {
   for(let i=from+1; i<=to; i++) {
     materials.get('element').get('crystal')[ASCENSIONMATS[i].get('crystal rarity')-1] += ASCENSIONMATS[i].get('crystal amount')
     materials.get('element').set('core',  materials.get('element').get('core') + ASCENSIONMATS[i].get('core amount'))
-    materials.               set('local', materials.get('local') + ASCENSIONMATS[i].get('local amount'))
-    materials.get('common')[ASCENSIONMATS[i].get('common rarity')-1]                  += ASCENSIONMATS[i].get('common amount')
-    materials.               set('mora',  materials.get('mora') + ASCENSIONMATS[i].get('mora'))
+    materials.set('local', materials.get('local') + ASCENSIONMATS[i].get('local amount'))
+    materials.get('common')[ASCENSIONMATS[i].get('common rarity')-1] += ASCENSIONMATS[i].get('common amount')
+    materials.set('mora',  materials.get('mora') + ASCENSIONMATS[i].get('mora'))
   }
   return materials
 }
@@ -678,15 +678,15 @@ export function getTalentMaterialsForCharacters(input) {
         let n = nameLookupForTeachings(tmats.get('teaching'),i)
         mats.set(n, (mats.get(n) || 0) + v)
       })
-      console.log('tcost common: '+tcost.get('common').filter(x=>x>0))
-      console.log('tmats common: '+tmats.get('common'))
+      // console.log('tcost common: '+tcost.get('common').filter(x=>x>0))
+      // console.log('tmats common: '+tmats.get('common'))
       tcost.get('common').filter(x=>x>0).forEach((v,i) => {
         let n = nameLookupForCommons(tmats.get('common'),i)
         mats.set(n, (mats.get(n) || 0) + v)
       })
     }
   }
-  console.log(mats)
+  // console.log(mats)
   return mats
 }
 
@@ -698,9 +698,9 @@ export function getTalentMaterialsForCharacters(input) {
  */
 function nameLookupForTeachings(mat, rarity) {
   return [
-    "Teachings of \'_\'",
-    "Guide to \'_\'",
-    "Philosophies of \'_\'"
+    "Teachings of '_'",
+    "Guide to '_'",
+    "Philosophies of '_'"
   ][rarity].replace("_", mat)
 }
 
@@ -770,7 +770,7 @@ export const commons = new Map([
  */
 function nameLookupForCommons(mat, rarity) {
   // TODO: fix this hacky intermediate lookup for mock data
-  const info = commons.get([...commons.entries()].find(([a,b])=>b.get('type')==mat)[0]);
+  const info = commons.get([...commons.entries()].find(([a,b])=>b.get('type')===mat)[0]);
   // return commons.get(mat.toLowerCase()).get('tiers')[rarity]
   //   .replace("_", commons.get(mat.toLowerCase()).get('type').replace(/\+.*/, ""));
   // return [...commons.values()].find(e=>e.get('type')==mat).get('tiers')[rarity]
