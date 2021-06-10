@@ -287,7 +287,7 @@ function calculateXPMaterials(xp) {
 /**
  * Calculate Mora required to use xp books
  * Mora required per XP is .2, i.e. ratio of 1 Mora to 5 XP
- * @param {Array<number>} materials - Array of number of XP material books, as from {@link calculateXPMaterials}
+ * @param {Array<number>} materials - Array of number of XP material books, as from {@linkcode calculateXPMaterials}
  * @return {number} total Mora
  */
 function calculateMoraForXPMaterials(materials) {
@@ -297,7 +297,7 @@ function calculateMoraForXPMaterials(materials) {
  * Calculate XP materials and Mora required to gain levels
  * @param {number} from - starting level
  * @param {number} to - target level
- * @return {Map<string,*>} Map with keys `xpbooks` - pointing to the array returned by {@link calculateXPMaterials} - and `mora`
+ * @return {Map<string,*>} Map with keys `xpbooks` - pointing to the array returned by {@linkcode calculateXPMaterials} - and `mora`
  */
 export function getLevelCost(from, to) {
   const fromXP = TOTALEXP[from], toXP = TOTALEXP[to],

@@ -1,14 +1,12 @@
 import './AscensionPip.css'
 
 /**
- * AscensionPip
  * function component for pip. renders empty div with ascensionPip class
  * and passed classes, props
- * currently passed class sete styling for pip status - activeTarget, activeSource, inactive
+ * currently passed class sets styling for pip status - activeTarget, activeSource, inactive
  * while passed prop is the pip number
- * 
  * @param {Array} classes
- * @param {Props} props
+ * @param {React.Props} props - possible html/jsx
  * @returns {JSX}
  */
 function AscensionPip({classes=[''], ...props}) {
@@ -18,10 +16,8 @@ function AscensionPip({classes=[''], ...props}) {
 }
 
 /**
- * AscensionPipStarClipPath
- * function component for svg clipPath
+ * function component wrapping raw SVG path in svg and clipPath element
  * gets applied to AscensionPip component through ascensionPip css class styling
- * 
  * @returns {JSX}
  */
 export function AscensionPipStarClipPath() {
@@ -35,13 +31,11 @@ export function AscensionPipStarClipPath() {
 }
 
 /**
- * Star
- * svg approximation of ascension star, with defaults for size, stroke, and fill to act as
- * a mask
- * 
+ * function component for svg path approximation of ascension star,
+ * with defaults for size, stroke, and fill to act as a mask
  * none of the args are necessary currently
- * 
- * @param {Props} props
+ * needs to be used inside svg tag
+ * @param {React.Props} props
  * @returns {JSX}
  */
 function Star({s=[.5,.5],q=.47,stroke="none",fill="white",...props}) {

@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-import Test from './Test.jsx';
+import KApp from './KApp';
 
 ReactDOM.render(
   <React.StrictMode>
     <div id="testwrapper">
-    {new Array(10).fill(0).map((_,i)=><Test key={i}/>)}
+      <KApp />
     </div>
   </React.StrictMode>,
   document.getElementById('root')
