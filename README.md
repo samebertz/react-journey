@@ -2,69 +2,92 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+# TODO
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# List
+[x] reflect selected in render
+ - should selected boolean on list items?
+[x] select as set, and remove
+[x] filter
+[x] output
+ - compute from selected
+[ ] change global consts, probably don't need characters to be a map, should be array
+[ ] use passthroughProps
 
-### Analyzing the Bundle Size
+# Components
+## App
+view toggles between List and Output, maintains shared state
+#### Props
+---
+#### State
+selected List Items
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```jsx
+state=='edit'
+? <CharacterList />
+: <MaterialList />
+```
 
-### Making a Progressive Web App
+### List
+flex row wrap of List Items, where key=name
+#### Props
+#### State
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### List Item
+grid of list item details
+#### Props
+#### State
 
-### Advanced Configuration
+### Output
+flex row wrap of materials
+#### Props
+#### State
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# Interactions
+## add/remove character
+handle click on List Item
+## switch between list/output views
+handle click in App?
 
-### Deployment
+# Concerns
+dynamic data in render calls
+where to keep selected bools
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Qs
++ if there's a list of items with editable data, is each item a form?
++ what if each item has 1 field?
++ what if each item has multiple fields?
++ what if the editable state is owned by each item?
++ what if there is a submit button on each item?
++ what if there is a submit button outside the list?
++ what if subscribing to changes?
++ what if only applying changes on submit?
 
-### `npm run build` fails to minify
+# Scratch
+user data
+┣ characters
+┃ ┗ stats
+┗ weapons
+  ┗ stats
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+view state
+┣ view modes
+┣ list filters and ordering
+┗ tracked characters
+
+
+┣┃┗┳━
+
+
+could have edit modes save to their own copy of data, or write to main store on change
+
+#### List
+- character list display mode toggle
+  + animated
+- tracked character editing
