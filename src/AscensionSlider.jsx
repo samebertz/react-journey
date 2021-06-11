@@ -4,9 +4,9 @@ import AscensionPip from './AscensionPip';
 import {AscensionPipStarClipPath} from './AscensionPip.jsx';
 
 /**
- * AscensionSlider
+ * class component for a discrete range slider within [0,6]
  * collection of 6 svg pips, with wrapper for mouse event handling
- * acts as a discrete range slider within [0,6]
+ * @extends React.Component
  */
 class AscensionSlider extends React.Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class AscensionSlider extends React.Component {
   /**
    * @function onMouseDown
    * @description sets grabbed state to the closest stop to a mousedown event, 0: left, 1: right
-   * @param {SyntheticEvent} s - React SyntheticEvent
+   * @param {SyntheticEvent} s - React SyntheticEvent of mousedown
    */
   onMouseDown = s => {
     this.setState({grabbed: this.getClosestStop(s)});
@@ -78,7 +78,7 @@ class AscensionSlider extends React.Component {
   /**
    * @function onMouseMove
    * @description sets currently grabbed stop in state to a pip, if it is different and lmb is down
-   * @param {SyntheticEvent} s - React SyntheticEvent
+   * @param {SyntheticEvent} s - React SyntheticEvent of mousemove
    */
   onMouseMove = s => {
     const p = this.getClosestPip(s);
@@ -89,7 +89,7 @@ class AscensionSlider extends React.Component {
    * @function onMouseUp
    * @description unsets grabbed stop in state
    */
-  onMouseUp = s => {
+  onMouseUp = _ => {
     this.setState({grabbed: false});
     // s.preventDefault(); s.stopPropagation(); return false;
   };

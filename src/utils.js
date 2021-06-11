@@ -144,6 +144,8 @@ const mock_ASSET_PATHS = new Map([
  * @param {string} type - asset type/category key
  * @param {string} name - specific asset key
  * @return {string} fully qualified path
+ * 
+ * @todo migrate from mock to real data
  */
 export function getAssetPath(type, name) {
   // console.log('getAssetPath('+[].slice.call(arguments)+')')
@@ -257,6 +259,8 @@ export const CHARACTER_LIST = Array.from(mock_CHARACTER_DATA.keys());
  * @return {string|number|Map} data keys `name`, `element`, `weapon` return `string`
  * data key `rarity` returns `number`
  * data keys `materials`, `talents`, `constellations` return `Map`
+ * 
+ * @todo migrate from mock to real data
  */
 export function getCharacterData(character, data) {
   return mock_CHARACTER_DATA.get(character).get(data);
@@ -265,6 +269,8 @@ export function getCharacterData(character, data) {
 /** TODO
  * @param {Array<string>} characters - array of character names
  * @return {Array<string>} array of all unique material data keys associated with characters
+ * 
+ * @todo ??? i forget
  */
 export function getAllMaterialsForCharacters(characters) {
   return [...new Set(characters.flatMap(characters => [...getCharacterData(characters, 'materials').values()])).values()]

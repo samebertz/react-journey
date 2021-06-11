@@ -70,11 +70,12 @@ function FilterButton(props) { return (
   </button>
 )}
 /** TODO
- * @todo refactor to use `c.isSelected` instead of `props.selected.get(c)`
  * function component for character list, with toggleable selection state for each character
  * renders `ul` of {@linkcode CharacterListItem} components, using character name as React `key`
  * @param {React.Props} props - list of selected characters
  * @return {JSX}
+ * 
+ * @todo refactor to use `c.isSelected` instead of `props.selected.get(c)`
  */
 function CharacterList(props) { return (
   <ul className="list" id="characterList">

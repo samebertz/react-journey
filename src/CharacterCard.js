@@ -1,5 +1,11 @@
 import { getAssetPath, getCharacterData } from "./utils";
 
+/**
+ * function component for card style display of character information
+ * renders portrait, element icon, weapon icon, name badge
+ * @param {React.Props} props - character name
+ * @return {JSX}
+ */
 function CharacterCard(props) { return (
   <div className="characterCard">
     <CharacterPortrait {...props} />
@@ -9,12 +15,29 @@ function CharacterCard(props) { return (
   </div>
 )}
 
+/**
+ * function component for character portrait
+ * renders `img` with src retrieved by {@linkcode getAssetPath}
+ * @param {React.Props} props - character name
+ */
 function CharacterPortrait(props) { return ( <img className="characterPortrait" src={getAssetPath('character', props.character)} alt="" /> ) }
-
+/**
+ * function component for character name badge
+ * renders `span`
+ * @param {React.Props} props - character name
+ */
 function CharacterName(props) { return ( <span className="characterName">{props.name}</span> ) }
-
+/**
+ * function component for small element icon
+ * renders `img` with src retrieved by {@linkcode getAssetPath}
+ * @param {React.Props} props - element
+ */
 function ElementIcon(props) { return ( <img className="elementIcon" src={getAssetPath('element', props.element)} alt="" /> ) }
-
+/**
+ * function component for small weapon type icon
+ * renders `img` with src retrieved by {@linkcode getAssetPath}
+ * @param {React.Props} props - weapon type
+ */
 function WeaponIcon(props) { return ( <img className="weaponIcon" src={getAssetPath('weapon', props.weapon)} alt="" /> ) }
 
 export default CharacterCard;
