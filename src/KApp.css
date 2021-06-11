@@ -1,3 +1,5 @@
+body {background-color: #222;}
+
 * {
   margin: 0;
   border: 0;
@@ -64,7 +66,8 @@ ul {
   left: 0;
   width: 100%;
   text-align: center;
-} .characterName{background-color: lightsalmon;}
+}
+.characterName{background-color: lightsalmon;}
 .elementIcon, .weaponIcon {
   position: absolute;
   right: 0;
